@@ -9,12 +9,11 @@ import java.io.IOException;
 public class writeWAV {
     public static void main(String[] args) throws IOException {
         final double sampleRate = 44100.0;
-        final double frequency = 440;
-        final double frequency2 = 90;
+        final double frequency = 90;
         final double amplitude = 1.0;
         final double seconds = 2.0;
-        final double twoPiF = 2 * Math.PI * frequency;
-        final double piF = Math.PI * frequency2;
+        final double twoPiF = Math.PI * frequency;
+        final double piF = Math.PI * frequency;
 
         float[] buffer = new float[(int) (seconds * sampleRate)];
 
