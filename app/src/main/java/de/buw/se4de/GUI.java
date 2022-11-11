@@ -15,7 +15,7 @@ public class GUI extends JFrame{
 
     public GUI() throws IOException {
         super("Thanidira");
-        BufferedImage background = ImageIO.read(new File("./background.jpg"));
+        BufferedImage background = ImageIO.read(new File("./app/src/main/java/de/buw/se4de/background.jpg"));
         JButton export = new JButton("Export to .wav");
         JLabel pic_label = new JLabel(new ImageIcon(background));
         setSize(1200, canvasHeight);
