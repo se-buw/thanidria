@@ -1,3 +1,12 @@
+little doc describing what we did, hope it helps a bit!
+# implemented functions
+(App.java ist bloß noch vom gradle template und wird nicht benutzt)
+-Audio Dateien .wav durch 10 angeklickte Punkte im Window wird gerendert. Diese Punkte werden in einer Liste gespeichert und invertiert, weil Ursprung Koordinatensystem oben links ist und nicht unten.
+Dann werden durch die gezeichneten Linien .wav Dateien erstellt und diese kombiniert durch combineAudio. Die wavAppended3.wav Datei ist dann der ganze gezeichnete Sound.
+
+-Zeichnen auf einer Leinwand ist mit Linien möglich
+-Frequenzen und Noten sind auf der Leinwand zu sehen
+
 # java-gradle-template
 A template java project using gradle and basic dependencies
 
