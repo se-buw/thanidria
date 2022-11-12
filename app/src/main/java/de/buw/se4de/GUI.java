@@ -40,7 +40,7 @@ public class GUI extends JFrame{
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(3));
-        g2.drawLine(a.xCoordinate , a.yCoordinate+30, b.xCoordinate+35, a.yCoordinate+30);
+        g2.drawLine(a.xCoordinate-10 , a.yCoordinate+30, b.xCoordinate-20, a.yCoordinate+30);
     }
 
 
