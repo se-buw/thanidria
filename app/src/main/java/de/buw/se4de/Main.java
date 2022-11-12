@@ -127,6 +127,8 @@ public class Main {
                         if (myPoints.size() % 2 != 0) {   // every two points get combined to create a line
                             myPoints.get(myPoints.size() - 2).setY(myPoints.get(myPoints.size() - 1)); // lines up last two points in array, if array size is odd
                             System.out.println(myPoints);
+
+                            //painting lines
                             gui.paint(g, myPoints.get(myPoints.size() - 1), myPoints.get(myPoints.size() - 2));
                             //gui.getContentPane().repaint();
 
