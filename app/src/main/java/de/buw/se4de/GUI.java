@@ -26,7 +26,7 @@ public class GUI extends JPanel {
         Image image = icon.getImage();
         g.drawImage(image,0,0,this.getWidth(),this.getHeight(),this);
 
-        g.setColor(Color.red);
+        g.setColor(Color.blue);
 
         for (Line line : lines) {
             line.draw(g);
