@@ -1,38 +1,23 @@
 package de.buw.se4de;
 
-import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
 import java.awt.BorderLayout;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.SequenceInputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class App {
 	public static void main(String[] args) throws IOException{
-
 		JFrame mainFrame = new JFrame("Thanidria");
-		mainFrame.setSize(1220, 945);
+		mainFrame.setSize(900, 600);
 		mainFrame.setResizable(false);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JButton export = new JButton("Export");
-		export.setBounds(10,10,100,25);
 
 		JButton name = new JButton("Name");
-		name.setBounds(10,50,100,25);
-
-		//JButton name = new JButton("Name");
-		//name.setBounds(10,10,100,25);
 
 		GUI gui = new GUI();
 
@@ -57,19 +42,48 @@ public class App {
 			}
 		});
 
-		String NAME = "none";
+		AtomicReference<String> NAME = new AtomicReference<>("none");
 
-		export.addActionListener(e -> {
-			gui.exportMusic("test", 4.0);
+		name.addActionListener(e -> {
+			JFrame frame = new JFrame("Name");
+			frame.setSize(400, 300);
+			frame.setLocation(100, 150);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+			JLabel text = new JLabel("Gebe deiner Datei einen Namen.");
+			text.setBounds(50,50,200,30);
+
+			JTextField textfield = new JTextField();
+			textfield.setBounds(50, 100, 200, 30);
+
+			JButton ok = new JButton("OK");
+			ok.setBounds(50, 150, 200, 30);
+
+			ok.addActionListener(f ->{
+					NAME.set(textfield.getText());
+					frame.dispose();
+				});
+
+
+			frame.add(text);
+			frame.add(textfield);
+			frame.add(ok);
+			frame.setLayout(null);
+			frame.setVisible(true);
 		});
 
-		mainFrame.getContentPane().add(name);
-		mainFrame.getContentPane().add(export);
+		export.addActionListener(e -> {
+			gui.exportMusic(NAME.get(), 4.0);
+		});
+
+		JPanel panel = new JPanel();
+		panel.add(export, BorderLayout.NORTH);
+		panel.add(name, BorderLayout.NORTH);
+		mainFrame.getContentPane().add(panel, BorderLayout.NORTH);
 		mainFrame.getContentPane().add(gui);
 
 		mainFrame.validate();
 		mainFrame.setVisible(true);
-
 	}
 }
 

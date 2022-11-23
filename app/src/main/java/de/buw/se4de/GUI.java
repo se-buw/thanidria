@@ -22,7 +22,7 @@ public class GUI extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        ImageIcon icon = new ImageIcon("./app/src/main/java/de/buw/se4de/background.jpg");
+        ImageIcon icon = new ImageIcon("C:\\Users\\danie\\Desktop\\thanidria\\thanidria\\app\\src\\main\\java\\de\\buw\\se4de\\background.jpg");
         Image image = icon.getImage();
         g.drawImage(image,0,0,this.getWidth(),this.getHeight(),this);
 
