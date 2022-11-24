@@ -10,12 +10,12 @@ public class MyPoint {
         this.yCoordinate = y;
     }
 
-
+    // Gruppe 3: Funktion der vorherigen Gruppe, haben wir allerdings nicht gebraucht
     public String toString() { // allows easy System.out.print() of MyPoint objects
         return "(" + this.xCoordinate + "," + this.yCoordinate + ")";
     }
 
-
+    // Gruppe 3: Funktion der vorherigen Gruppe, haben wir allerdings nicht gebraucht
     public double getDistance(MyPoint b) { // Measures distance between points, used to generate note length, although in practice it only compares x values, since notes do not change in pitch
         double distX = (b.xCoordinate - this.xCoordinate);
         double distY = (b.yCoordinate - this.yCoordinate);
@@ -23,7 +23,7 @@ public class MyPoint {
         return distance;
     }
 
-
+    // Gruppe 3: Funktion der vorherigen Gruppe, haben wir allerdings nicht gebraucht
     public void roundPoint(MyPoint b, int roundingLimit) { // Rounds similar points within a given rounding limit to be the same point (this is basically so that points/notes can be connected to each other, without the user needing pixel perfect accuracy to do so)
         if (((b.xCoordinate <= this.xCoordinate + roundingLimit) && (b.xCoordinate >= this.xCoordinate - roundingLimit)) &&
                 ((b.yCoordinate <= this.yCoordinate + roundingLimit) && (b.yCoordinate >= this.yCoordinate - roundingLimit))) {
@@ -34,7 +34,7 @@ public class MyPoint {
         } else
             System.out.println("This point does not need to be rounded.");
     }
-
+    // Gruppe 3: Funktion der vorherigen Gruppe, haben wir allerdings nicht gebraucht
     public void setY(MyPoint b) {   // rounds only y coordinate, is used to flip y values in sound generation
         b.yCoordinate = this.yCoordinate;
     }
