@@ -56,9 +56,9 @@ public class App {
 				gui.repaint();
 			}
 		});
-
-		AtomicReference<String> nameWAV = new AtomicReference<>("none");
-		AtomicReference<String> playWAV = new AtomicReference<>("none");
+		// dieser Typ hat die IDEA vorgeschlagen, um die Variablen später durch die lambda funktion zu überschreiben
+		AtomicReference<String> nameWAV = new AtomicReference<>("test");
+		AtomicReference<String> playWAV = new AtomicReference<>("test");
 
 		play.addActionListener(e -> {
 			JFrame frame = new JFrame("Play");
@@ -77,7 +77,7 @@ public class App {
 
 			ok.addActionListener(f ->{
 				nameWAV.set(textfield.getText());
-				play(nameWAV+".wav");
+				play("src/audios/"+nameWAV+".wav");
 				frame.dispose();
 			});
 			frame.add(text);
@@ -116,7 +116,7 @@ public class App {
 		export.addActionListener(e -> {
 			gui.exportMusic(nameWAV.get(), 4.0);
 		});
-
+		// hier wurde ein Panel erstellt, mit Knöpfen versehen und daraufhin mit dem main frame verbunden
 		JPanel panel = new JPanel();
 		panel.add(play, BorderLayout.NORTH);
 		panel.add(export, BorderLayout.NORTH);

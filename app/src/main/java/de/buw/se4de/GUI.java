@@ -22,10 +22,11 @@ public class GUI extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        ImageIcon icon = new ImageIcon("C:\\Users\\danie\\Desktop\\thanidria\\thanidria\\app\\src\\main\\java\\de\\buw\\se4de\\background.jpg");
+        // here we use the background pic from the first implementation
+        ImageIcon icon = new ImageIcon("src/main/java/de/buw/se4de/background.jpg");
         Image image = icon.getImage();
         g.drawImage(image,0,0,this.getWidth(),this.getHeight(),this);
-
+        // blue color for the lines
         g.setColor(Color.blue);
 
         for (Line line : lines) {
@@ -36,7 +37,7 @@ public class GUI extends JPanel {
             activeLine.draw(g);
         }
     }
-
+    // die Funktion sorgt dafür, dass die gezogenen Linien sichtbar sind
     public void updateActiveLine(int x, int y, boolean mov) {
         if (isLineActive && mov) {
             activeLine.b.xCoordinate = x;
@@ -99,7 +100,6 @@ public class GUI extends JPanel {
     }
 
     // man kann Wellen nicht einfach so verknüpfen, also geht man schrittweise durch die Phase
-    // hat was mit der Periode der Welle zu tun
     private float[] nco(double[] freqs, float[] buffer, double sampleRate) {
         double phase =  0.0;
         for (int i = 0; i < freqs.length; ++i) {

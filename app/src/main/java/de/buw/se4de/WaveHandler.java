@@ -8,8 +8,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
-// das hier ist das selbe wie im Github repo
-// schreibt einfach nur die gesammelten Samples in eine .wav Datei
+
+// diese Klasse führt alle gezeichneten Linien zu einer Audiodatei zusammen
 public class WaveHandler {
     public static void writeFile(String name, float[] buffer, double sampleRate) throws IOException {
         final byte[] byteBuffer = new byte[buffer.length * 2];
@@ -22,8 +22,7 @@ public class WaveHandler {
             byteBuffer[i] = (byte)(x >>> 8);
         }
 
-        //File out = new File("src/main/resources/"+name+".wav");
-        File out = new File(name+".wav");
+        File out = new File("src/audios/"+name+".wav");
 
         final boolean bigEndian = false;
         final boolean signed = true;
