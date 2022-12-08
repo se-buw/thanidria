@@ -97,6 +97,19 @@ class MyPointTest {
         assertEquals(p.xCoordinate,p2.xCoordinate);
         assertEquals(p.yCoordinate,p2.yCoordinate);
     }
+    @Test
+    void roundPointTestFail() {
+        int x = 2;
+        int y = 3;
+        MyPoint p = new MyPoint(x,y);
+
+        int x2= 0;
+        int y2= 1;
+        MyPoint p2 = new MyPoint(x2,y2);
+        p.roundPoint(p2,0);
+        assertNotEquals(p.xCoordinate,p2.xCoordinate);
+        assertNotEquals(p.yCoordinate,p2.yCoordinate);
+    }
 
     @Test
     void setYTest() {
