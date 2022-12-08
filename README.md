@@ -1,3 +1,6 @@
+# Thanidria
+![gradle build](https://github.com/se-buw/thanidria/actions/workflows/gradle.yml/badge.svg)
+
 little doc describing what we did, hope it helps a bit!
 # implemented functions
 (App.java ist bloß noch vom gradle template und wird nicht benutzt)
