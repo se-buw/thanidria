@@ -56,7 +56,7 @@ public class App {
 				gui.repaint();
 			}
 		});
-		// dieser Typ hat die IDEA vorgeschlagen, um die Variablen später durch die lambda funktion zu überschreiben
+		// dieser Typ hat die IDEA vorgeschlagen, um die Variablen sp&auml;ter durch die lambda funktion zu &uuml;berschreiben
 		AtomicReference<String> nameWAV = new AtomicReference<>("test");
 		AtomicReference<String> playWAV = new AtomicReference<>("test");
 
