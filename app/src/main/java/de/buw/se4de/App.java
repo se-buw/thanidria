@@ -77,7 +77,7 @@ public class App {
 
 			ok.addActionListener(f ->{
 				nameWAV.set(textfield.getText());
-				play("src/audios/"+nameWAV+".wav");
+				play("app/src/audios/"+nameWAV+".wav");
 				frame.dispose();
 			});
 			frame.add(text);
