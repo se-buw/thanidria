@@ -132,11 +132,22 @@ public class App {
 			frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 			ok.addActionListener(f ->{
-
 				nameWAV.set(textfield.getText());
-				frame.dispose();
-				gui.exportMusic(nameWAV.get(), 4.0);
-				//frame.setVisible(false);
+
+				String name = textfield.getText();
+				String specialCharacters = "!@#$%&*()'+,-./:;<=>?[]^_`{|}";
+				for (int i = 0; i < name.length(); i++) {
+					char ch = name.charAt(i);
+					if (specialCharacters.contains(Character.toString(ch))) {
+						JOptionPane.showMessageDialog(frame, "Der Name soll nur aus Buchstaben und Ziffern bestehen!");
+						break;
+					}
+					else if (i == name.length() - 1){
+						gui.exportMusic(nameWAV.get(), 4.0);
+						frame.dispose();
+					}
+				}
+
 			});
 			frame.add(text);
 			frame.add(textfield);
