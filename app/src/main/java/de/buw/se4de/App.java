@@ -30,9 +30,9 @@ public class App {
 
 		JButton play = new JButton("Play");
 
-		JButton export = new JButton("Export");
+		JButton save = new JButton("Save");
 
-		JButton name = new JButton("Name");
+		//JButton name = new JButton("Name");
 
 		GUI gui = new GUI();
 
@@ -77,7 +77,7 @@ public class App {
 
 			ok.addActionListener(f ->{
 				nameWAV.set(textfield.getText());
-				play("src/audios/"+nameWAV+".wav");
+				play("app/src/audios/"+nameWAV+".wav");
 				frame.dispose();
 			});
 			frame.add(text);
@@ -86,7 +86,7 @@ public class App {
 			frame.setLayout(null);
 			frame.setVisible(true);
 		});
-
+		/*
 		name.addActionListener(e -> {
 			JFrame frame = new JFrame("Name");
 			frame.setSize(400, 300);
@@ -112,18 +112,44 @@ public class App {
 			frame.setLayout(null);
 			frame.setVisible(true);
 		});
+		*/
 
-		export.addActionListener(e -> {
-			gui.exportMusic(nameWAV.get(), 4.0);
+		save.addActionListener(e -> {
+			JFrame frame = new JFrame("Name");
+			frame.setSize(400, 300);
+			frame.setLocation(100, 150);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+			JLabel text = new JLabel("Gebe deiner Datei einen Namen.", SwingConstants.CENTER);
+			text.setBounds(50,50,300,30);
+
+			JTextField textfield = new JTextField();
+			textfield.setBounds(50, 100, 300, 30);
+
+			JButton ok = new JButton("OK");
+			ok.setBounds(150, 150, 100, 30);
+
+			ok.addActionListener(f ->{
+
+				nameWAV.set(textfield.getText());
+				//frame.dispose();
+				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				gui.exportMusic(nameWAV.get(), 4.0);
+				frame.setVisible(false);
+			});
+			frame.add(text);
+			frame.add(textfield);
+			frame.add(ok);
+			frame.setLayout(null);
+			frame.setVisible(true);
 		});
+
 		// hier wurde ein Panel erstellt, mit Knöpfen versehen und daraufhin mit dem main frame verbunden
 		JPanel panel = new JPanel();
 		panel.add(play, BorderLayout.NORTH);
-		panel.add(export, BorderLayout.NORTH);
-		panel.add(name, BorderLayout.NORTH);
+		panel.add(save, BorderLayout.NORTH);
 		mainFrame.getContentPane().add(panel, BorderLayout.NORTH);
 		mainFrame.getContentPane().add(gui);
-
 		mainFrame.validate();
 		mainFrame.setVisible(true);
 	}
