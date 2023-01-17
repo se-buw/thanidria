@@ -74,6 +74,7 @@ public class App {
 
 			JButton ok = new JButton("OK");
 			ok.setBounds(150, 150, 100, 30);
+			frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 			ok.addActionListener(f ->{
 				nameWAV.set(textfield.getText());
@@ -128,14 +129,14 @@ public class App {
 
 			JButton ok = new JButton("OK");
 			ok.setBounds(150, 150, 100, 30);
+			frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 			ok.addActionListener(f ->{
 
 				nameWAV.set(textfield.getText());
-				//frame.dispose();
-				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				frame.dispose();
 				gui.exportMusic(nameWAV.get(), 4.0);
-				frame.setVisible(false);
+				//frame.setVisible(false);
 			});
 			frame.add(text);
 			frame.add(textfield);
