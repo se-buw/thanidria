@@ -23,7 +23,7 @@ public class GUI extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         // here we use the background pic from the first implementation
-        ImageIcon icon = new ImageIcon("src/main/java/de/buw/se4de/background.jpg");
+        ImageIcon icon = new ImageIcon("app/src/main/java/de/buw/se4de/background.jpg");
         Image image = icon.getImage();
         g.drawImage(image,0,0,this.getWidth(),this.getHeight(),this);
         // blue color for the lines
