@@ -38,10 +38,10 @@ public class App {
 
 		gui.addMouseListener(new MouseListener() {
 			public void mouseExited(MouseEvent e) {}
-			public void mousePressed(MouseEvent e) {}
+			public void mouseClicked(MouseEvent e){}
 			public void mouseReleased(MouseEvent e) {}
 			public void mouseEntered(MouseEvent e) {}
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				gui.updateActiveLine(e.getX(), e.getY(), false);
 				gui.repaint();
 			}
