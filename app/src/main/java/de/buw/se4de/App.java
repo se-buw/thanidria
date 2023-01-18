@@ -131,6 +131,11 @@ public class App {
 
 				String name = textfield.getText();
 				String specialCharacters = "!@#$%&*()'+,-./:;<=>?[]^_`{|}";
+
+				if (name.length() == 0){
+					JOptionPane.showMessageDialog(frame, "Ein leerer Name ist nicht erlaubt!");
+				}
+
 				for (int i = 0; i < name.length(); i++) {
 					char ch = name.charAt(i);
 					if (specialCharacters.contains(Character.toString(ch))) {
