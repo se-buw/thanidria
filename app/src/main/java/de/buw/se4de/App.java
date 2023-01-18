@@ -5,6 +5,9 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.io.File;
 import javax.sound.sampled.*;
@@ -22,7 +25,8 @@ public class App {
 		// The GUI element is where the user will draw their song
 		GUI gui = new GUI();
 
-		JButton play = new JButton("Play");
+		JButton play_without_saving = new JButton("Play without Saving");
+		JButton play_saved = new JButton("Play a Saved Melody");
 		JButton save = new JButton("Save");
 
 
@@ -50,11 +54,15 @@ public class App {
 		AtomicReference<String> nameWAV = new AtomicReference<>("test");
 		// AtomicReference<String> playWAV = new AtomicReference<>("test");
 
-		play.addActionListener(e -> {
+		play_without_saving.addActionListener(e -> {
+			gui.exportMusic("", 4.0);
+			play("app/src/audios/.wav");
+		});
+
+		play_saved.addActionListener(e -> {
 			JFrame frame = new JFrame("Play");
 			frame.setSize(400, 300);
 			frame.setLocation(100, 150);
-
 
 			JLabel text = new JLabel("Gebe den Namen der abzuspielenden Datei ein.", SwingConstants.CENTER);
 			text.setBounds(50,50,300,30);
@@ -70,9 +78,16 @@ public class App {
 
 			ok.addActionListener(f ->{
 				nameWAV.set(textField.getText());
-
-				play("app/src/audios/"+nameWAV+".wav");
-				frame.dispose();
+				File temp = new File("app/src/audios/"+nameWAV+".wav");
+				if (nameWAV.get().length() == 0){
+					JOptionPane.showMessageDialog(frame, "Ein leerer Name ist nicht erlaubt!");
+				}else if(!temp.exists()){
+					JOptionPane.showMessageDialog(frame, "Diese Datei existiert nicht!");
+				}
+				else{
+					play("app/src/audios/"+nameWAV+".wav");
+					frame.dispose();
+				}
 			});
 			frame.add(text);
 			frame.add(textField);
@@ -132,7 +147,8 @@ public class App {
 		// hier wurde ein Panel erstellt, mit Knöpfen versehen und daraufhin mit dem main frame verbunden
 		JPanel panel = new JPanel();
 
-		panel.add(play, BorderLayout.NORTH);
+		panel.add(play_without_saving, BorderLayout.NORTH);
+		panel.add(play_saved, BorderLayout.NORTH);
 		panel.add(save, BorderLayout.NORTH);
 
 		mainFrame.getContentPane().add(gui);
