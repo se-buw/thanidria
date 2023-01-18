@@ -45,6 +45,8 @@ public class GUI extends JPanel {
         } else if (!isLineActive && !mov) {
             activeLine.a.xCoordinate = x;
             activeLine.a.yCoordinate = y;
+            activeLine.b.xCoordinate = x;
+            activeLine.b.yCoordinate = y;
             isLineActive = true;
         } else if (isLineActive && !mov) {
             activeLine.b.xCoordinate = x;
