@@ -21,7 +21,7 @@ public class App {
 		mainFrame.getRootPane().setBorder(new EmptyBorder(10,10,0,10));
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setLayout(new BoxLayout(mainFrame.getContentPane(), BoxLayout.Y_AXIS));
-		mainFrame.setResizable(false);
+		mainFrame.setResizable(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// The DrawingSurface element is the part of the window where the user will draw their song

@@ -12,8 +12,17 @@ public class DrawingSurface extends JPanel {
     private Line activeLine = new Line(new MyPoint(0, 0), new MyPoint(0, 0));
     private ArrayList<Line> lines = new ArrayList<>();
 
-    public void draw(Graphics g, MyPoint a, MyPoint b) {
-        g.drawLine(a.xCoordinate, a.yCoordinate, b.xCoordinate, b.yCoordinate);
+    public void drawCenteredString(Graphics g, String text, Rectangle rect, Font font) {
+        // Get the FontMetrics
+        FontMetrics metrics = g.getFontMetrics(font);
+        // Determine the X coordinate for the text
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
+        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+        // Set the font
+        g.setFont(font);
+        // Draw the String
+        g.drawString(text, x, y);
     }
 
     @Override
@@ -30,16 +39,18 @@ public class DrawingSurface extends JPanel {
             float horizontal_scale = i/8;
             g.drawLine(0, (int) (d.height*horizontal_scale),d.width, (int) (d.height*horizontal_scale));
             int frequency = (int) (880 - 880 * horizontal_scale);
-            g.drawString(frequency + " Hz", 7, (int) (d.height * horizontal_scale - 1));
+            g.drawString(frequency + " Hz", 7, (int) (d.height * horizontal_scale));
         }
 
-        /*
-        // divide the DrawingSurface with vertical lines
+        // divide the DrawingSurface with vertical lines and their corresponding timestamps in seconds
         for (float i = 1; i < 12; i++){
             float vertical_scale = i/12;
             g.drawLine((int) (d.width*vertical_scale), 0,(int) (d.width*vertical_scale), d.height);
+            float time = 4 * vertical_scale;
+            time = Math.round(time);
+            g.drawString(time + " s", (int) (d.width * vertical_scale), d.height - 7);
         }
-        */
+
 
         // blue color for the lines
         g.setColor(Color.blue);
