@@ -12,17 +12,9 @@ import javax.sound.sampled.*;
 
 public class App {
 	//Spielt eine vorhandene .wav Datei ab.
-	public static void play(String filename) {
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File(filename)));
-			clip.start();
-		}
-		catch (Exception exc) {
-			exc.printStackTrace(System.out);
-		}
-	}
 	public static void main(String[] args) throws IOException{
+
+		// Creating the main window of the app and specifying its properties
 		JFrame mainFrame = new JFrame("Thanidria");
 		mainFrame.setSize(900, 600);
 		mainFrame.setResizable(false);
@@ -56,15 +48,14 @@ public class App {
 				gui.repaint();
 			}
 		});
-		// dieser Typ hat die IDEA vorgeschlagen, um die Variablen sp&auml;ter durch die lambda funktion zu &uuml;berschreiben
+		// dieser Typ hat die IDEA vorgeschlagen, um die Variablen später durch die lambda funktion zu überschreiben
 		AtomicReference<String> nameWAV = new AtomicReference<>("test");
-		AtomicReference<String> playWAV = new AtomicReference<>("test");
+		// AtomicReference<String> playWAV = new AtomicReference<>("test");
 
 		play.addActionListener(e -> {
 			JFrame frame = new JFrame("Play");
 			frame.setSize(400, 300);
 			frame.setLocation(100, 150);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 			JLabel text = new JLabel("Gebe den Namen der abzuspielenden Datei ein.", SwingConstants.CENTER);
 			text.setBounds(50,50,300,30);
@@ -74,6 +65,8 @@ public class App {
 
 			JButton ok = new JButton("OK");
 			ok.setBounds(150, 150, 100, 30);
+
+			frame.getRootPane().setDefaultButton(ok);
 			frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 			ok.addActionListener(f ->{
@@ -116,7 +109,7 @@ public class App {
 		*/
 
 		save.addActionListener(e -> {
-			JFrame frame = new JFrame("Name");
+			JFrame frame = new JFrame("Save");
 			frame.setSize(400, 300);
 			frame.setLocation(100, 150);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -130,6 +123,8 @@ public class App {
 			JButton ok = new JButton("OK");
 			ok.setBounds(150, 150, 100, 30);
 			frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+			frame.getRootPane().setDefaultButton(ok);
+
 
 			ok.addActionListener(f ->{
 				nameWAV.set(textfield.getText());
@@ -164,6 +159,16 @@ public class App {
 		mainFrame.getContentPane().add(gui);
 		mainFrame.validate();
 		mainFrame.setVisible(true);
+	}
+	public static void play(String filename) {
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(new File(filename)));
+			clip.start();
+		}
+		catch (Exception exc) {
+			exc.printStackTrace(System.out);
+		}
 	}
 }
 
