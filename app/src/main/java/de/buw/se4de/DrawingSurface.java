@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class GUI extends JPanel {
+public class DrawingSurface extends JPanel {
     private boolean isLineActive = false;
     private Line activeLine = new Line(new MyPoint(0, 0), new MyPoint(0, 0));
     private ArrayList<Line> lines = new ArrayList<>();
@@ -15,13 +15,32 @@ public class GUI extends JPanel {
     public void draw(Graphics g, MyPoint a, MyPoint b) {
         g.drawLine(a.xCoordinate, a.yCoordinate, b.xCoordinate, b.yCoordinate);
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // here we use the background pic from the first implementation
-        ImageIcon icon = new ImageIcon("app/src/main/java/de/buw/se4de/background.jpg");
-        Image image = icon.getImage();
-        g.drawImage(image,0,0,this.getWidth(),this.getHeight(),this);
+
+        //Get the current size of this component
+        Dimension d = this.getSize();
+
+        g.setColor(Color.lightGray);
+
+        // divide the DrawingSurface with horizontal lines and their corresponding frequency
+        for (float i = 1; i < 8; i++){
+            float horizontal_scale = i/8;
+            g.drawLine(0, (int) (d.height*horizontal_scale),d.width, (int) (d.height*horizontal_scale));
+            int frequency = (int) (880 - 880 * horizontal_scale);
+            g.drawString(frequency + " Hz", 7, (int) (d.height * horizontal_scale - 1));
+        }
+
+        /*
+        // divide the DrawingSurface with vertical lines
+        for (float i = 1; i < 12; i++){
+            float vertical_scale = i/12;
+            g.drawLine((int) (d.width*vertical_scale), 0,(int) (d.width*vertical_scale), d.height);
+        }
+        */
+
         // blue color for the lines
         g.setColor(Color.blue);
 

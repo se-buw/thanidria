@@ -24,14 +24,14 @@ public class App {
 		mainFrame.setResizable(false);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// The GUI element is the part of the window where the user will draw their song
-		GUI gui = new GUI();
-		gui.setPreferredSize(new Dimension(850, 650));
+		// The DrawingSurface element is the part of the window where the user will draw their song
+		DrawingSurface gui = new DrawingSurface();
+		gui.setPreferredSize(new Dimension(850, 600));
 		gui.setBorder(new LineBorder(Color.lightGray));
 		gui.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mainFrame.getContentPane().add(gui);
 
-		// The buttons are placed in a separate panel below the GUI element
+		// The buttons are placed in a separate panel below the DrawingSurface element
 		JPanel buttons = new JPanel();
 
 		JButton play = new JButton("Play");

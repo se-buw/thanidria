@@ -28,3 +28,6 @@ hs_err_pid*
 
 # Ignore Gradle build output directory
 build
+app/src/main/java/de/buw/se4de/will-it-warp.jpg
+app/src/main/java/de/buw/.DS_Store
+*.wav
