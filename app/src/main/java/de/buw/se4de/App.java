@@ -132,6 +132,7 @@ public class App {
 					}
 					else if (i == name.length() - 1){
 						gui.exportMusic(nameWAV.get(), 4.0);
+						JOptionPane.showMessageDialog(frame, "Erfolgreich gespecihert.");
 						frame.dispose();
 					}
 				}
