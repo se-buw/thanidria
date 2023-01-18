@@ -1,10 +1,7 @@
 package de.buw.se4de;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +10,6 @@ import java.util.Arrays;
 public class GUI extends JPanel {
     private boolean isLineActive = false;
     private Line activeLine = new Line(new MyPoint(0, 0), new MyPoint(0, 0));
-
     private ArrayList<Line> lines = new ArrayList<>();
 
     public void draw(Graphics g, MyPoint a, MyPoint b) {
@@ -23,7 +19,7 @@ public class GUI extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         // here we use the background pic from the first implementation
-        ImageIcon icon = new ImageIcon("src/main/java/de/buw/se4de/background.jpg");
+        ImageIcon icon = new ImageIcon("app/src/main/java/de/buw/se4de/background.jpg");
         Image image = icon.getImage();
         g.drawImage(image,0,0,this.getWidth(),this.getHeight(),this);
         // blue color for the lines
