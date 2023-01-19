@@ -35,9 +35,11 @@ public class App {
 		JPanel buttons = new JPanel();
 
 		JButton play = new JButton("Play");
+		JButton open = new JButton("Open");
 		JButton save = new JButton("Save");
 
 		buttons.add(play);
+		buttons.add(open);
 		buttons.add(save);
 
 		buttons.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -70,12 +72,17 @@ public class App {
 		// AtomicReference<String> playWAV = new AtomicReference<>("test");
 
 		play.addActionListener(e -> {
-			JFrame frame = new JFrame("Play");
+			gui.exportMusic("", 4.0);
+			play("app/src/audios/.wav");
+		});
+
+		open.addActionListener(e -> {
+			JFrame frame = new JFrame("Open");
 			frame.setSize(400, 300);
 			frame.setLocation(100, 150);
 
 
-			JLabel text = new JLabel("Gebe den Namen der abzuspielenden Datei ein.", SwingConstants.CENTER);
+			JLabel text = new JLabel("Enter the name of the file you want to listen to.", SwingConstants.CENTER);
 			text.setBounds(50,50,300,30);
 
 			JTextField textField = new JTextField();
@@ -106,7 +113,7 @@ public class App {
 			frame.setLocation(100, 150);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-			JLabel text = new JLabel("Gebe deiner Datei einen Namen.", SwingConstants.CENTER);
+			JLabel text = new JLabel("Enter a file name.", SwingConstants.CENTER);
 			text.setBounds(50,50,300,30);
 
 			JTextField textField = new JTextField();
@@ -122,24 +129,24 @@ public class App {
 				nameWAV.set(textField.getText());
 
 				String name = textField.getText();
-				String specialCharacters = "!@#$%&*()'+,-./:;<=>?[]^_`{|}";
+				String specialCharacters = "!@#$%&*()'+,./:;<=>?[]^`{|}";
 
 				if (name.length() == 0){
-					JOptionPane.showMessageDialog(frame, "Ein leerer Name ist nicht erlaubt!");
+					JOptionPane.showMessageDialog(frame, "Please enter a name for the file.");
 				}
 
 				for (int i = 0; i < name.length(); i++) {
 					char ch = name.charAt(i);
 					if (specialCharacters.contains(Character.toString(ch))) {
-						JOptionPane.showMessageDialog(frame, "Der Name soll nur aus Buchstaben und Ziffern bestehen!");
+						JOptionPane.showMessageDialog(frame, "The name should not contain any special characters.");
 						break;
 					}
 					else if (i == name.length() - 1){
 						gui.exportMusic(nameWAV.get(), 4.0);
+						JOptionPane.showMessageDialog(frame, "File was saved.");
 						frame.dispose();
 					}
 				}
-
 			});
 
 			frame.add(text);
