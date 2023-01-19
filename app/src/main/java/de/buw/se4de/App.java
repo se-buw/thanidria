@@ -1,6 +1,6 @@
 package de.buw.se4de;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.io.File;
 import javax.sound.sampled.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class App {
 	//Spielt eine vorhandene .wav Datei ab.
@@ -19,17 +21,34 @@ public class App {
 		// Creating the main window of the app and specifying its properties
 		JFrame mainFrame = new JFrame("Thanidria");
 		mainFrame.setSize(900, 600);
+		mainFrame.getRootPane().setBorder(new EmptyBorder(10,10,0,10));
+		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setLayout(new BoxLayout(mainFrame.getContentPane(), BoxLayout.Y_AXIS));
 		mainFrame.setResizable(false);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// The GUI element is where the user will draw their song
-		GUI gui = new GUI();
+		// The DrawingSurface element is the part of the window where the user will draw their song
+		DrawingSurface gui = new DrawingSurface();
+		gui.setPreferredSize(new Dimension(850, 600));
+		gui.setBorder(new LineBorder(Color.lightGray));
+		gui.setAlignmentX(Component.CENTER_ALIGNMENT);
+		mainFrame.getContentPane().add(gui);
+
+		// The buttons are placed in a separate panel below the DrawingSurface element
+		JPanel buttons = new JPanel();
 
 		JButton play_without_saving = new JButton("Play without Saving");
 		JButton play_saved = new JButton("Play a Saved Melody");
 		JButton save = new JButton("Save");
 
+		buttons.add(play);
+		buttons.add(save);
 
+		buttons.setAlignmentX(Component.CENTER_ALIGNMENT);
+		mainFrame.getContentPane().add(buttons);
+
+		mainFrame.validate();
+		mainFrame.setVisible(true);
 		gui.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseDragged(MouseEvent e) {}
@@ -138,24 +157,13 @@ public class App {
 				}
 
 			});
+
 			frame.add(text);
 			frame.add(textField);
 			frame.add(ok);
 			frame.setLayout(null);
 			frame.setVisible(true);
 		});
-
-		// hier wurde ein Panel erstellt, mit Knöpfen versehen und daraufhin mit dem main frame verbunden
-		JPanel panel = new JPanel();
-
-		panel.add(play_without_saving, BorderLayout.NORTH);
-		panel.add(play_saved, BorderLayout.NORTH);
-		panel.add(save, BorderLayout.NORTH);
-
-		mainFrame.getContentPane().add(gui);
-		mainFrame.getContentPane().add(panel, BorderLayout.SOUTH);
-		mainFrame.validate();
-		mainFrame.setVisible(true);
 	}
 	public static void play(String filename) {
 		try {

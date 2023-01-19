@@ -22,7 +22,7 @@ public class WaveHandler {
             byteBuffer[i] = (byte)(x >>> 8);
         }
 
-        File out = new File("app/src/audios/"+name+".wav");
+        File out = new File("app/src/audios/" + name + ".wav");
 
         final boolean bigEndian = false;
         final boolean signed = true;
