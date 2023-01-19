@@ -5,9 +5,6 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.io.File;
 import javax.sound.sampled.*;
@@ -37,8 +34,7 @@ public class App {
 		// The buttons are placed in a separate panel below the DrawingSurface element
 		JPanel buttons = new JPanel();
 
-		JButton play_without_saving = new JButton("Play without Saving");
-		JButton play_saved = new JButton("Play a Saved Melody");
+		JButton play = new JButton("Play");
 		JButton save = new JButton("Save");
 
 		buttons.add(play);
@@ -73,17 +69,13 @@ public class App {
 		AtomicReference<String> nameWAV = new AtomicReference<>("test");
 		// AtomicReference<String> playWAV = new AtomicReference<>("test");
 
-		play_without_saving.addActionListener(e -> {
-			gui.exportMusic("", 4.0);
-			play("app/src/audios/.wav");
-		});
-
-		play_saved.addActionListener(e -> {
+		play.addActionListener(e -> {
 			JFrame frame = new JFrame("Play");
 			frame.setSize(400, 300);
 			frame.setLocation(100, 150);
 
-			JLabel text = new JLabel("Enter the name of the file you want to listen to.", SwingConstants.CENTER);
+
+			JLabel text = new JLabel("Gebe den Namen der abzuspielenden Datei ein.", SwingConstants.CENTER);
 			text.setBounds(50,50,300,30);
 
 			JTextField textField = new JTextField();
@@ -97,16 +89,9 @@ public class App {
 
 			ok.addActionListener(f ->{
 				nameWAV.set(textField.getText());
-				File temp = new File("app/src/audios/" + nameWAV + ".wav");
-				if (nameWAV.get().length() == 0){
-					JOptionPane.showMessageDialog(frame, "Please enter a valid file name.");
-				}else if(!temp.exists()){
-					JOptionPane.showMessageDialog(frame, "This file doesn't exist.");
-				}
-				else{
-					play("app/src/audios/" + nameWAV + ".wav");
-					frame.dispose();
-				}
+
+				play("app/src/audios/"+nameWAV+".wav");
+				frame.dispose();
 			});
 			frame.add(text);
 			frame.add(textField);
@@ -121,7 +106,7 @@ public class App {
 			frame.setLocation(100, 150);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-			JLabel text = new JLabel("Enter a file name.", SwingConstants.CENTER);
+			JLabel text = new JLabel("Gebe deiner Datei einen Namen.", SwingConstants.CENTER);
 			text.setBounds(50,50,300,30);
 
 			JTextField textField = new JTextField();
@@ -137,21 +122,20 @@ public class App {
 				nameWAV.set(textField.getText());
 
 				String name = textField.getText();
-				String specialCharacters = "!@#$%&*()'+,./:;<=>?[]^`{|}";
+				String specialCharacters = "!@#$%&*()'+,-./:;<=>?[]^_`{|}";
 
 				if (name.length() == 0){
-					JOptionPane.showMessageDialog(frame, "Please enter a name for the file.");
+					JOptionPane.showMessageDialog(frame, "Ein leerer Name ist nicht erlaubt!");
 				}
 
 				for (int i = 0; i < name.length(); i++) {
 					char ch = name.charAt(i);
 					if (specialCharacters.contains(Character.toString(ch))) {
-						JOptionPane.showMessageDialog(frame, "The name should not contain any special characters.");
+						JOptionPane.showMessageDialog(frame, "Der Name soll nur aus Buchstaben und Ziffern bestehen!");
 						break;
 					}
 					else if (i == name.length() - 1){
 						gui.exportMusic(nameWAV.get(), 4.0);
-						JOptionPane.showMessageDialog(frame, "File was saved.");
 						frame.dispose();
 					}
 				}
