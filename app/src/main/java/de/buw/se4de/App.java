@@ -96,9 +96,16 @@ public class App {
 
 			ok.addActionListener(f ->{
 				nameWAV.set(textField.getText());
-
-				play("app/src/audios/"+nameWAV+".wav");
-				frame.dispose();
+				File temp = new File("app/src/audios/"+nameWAV+".wav");
+				if (nameWAV.get().length() == 0){
+					JOptionPane.showMessageDialog(frame, "Please enter a name of the file.");
+				}else if(!temp.exists()){
+					JOptionPane.showMessageDialog(frame, "This file doesn't exist.");
+				}
+				else{
+					play("app/src/audios/"+nameWAV+".wav");
+					frame.dispose();
+				}
 			});
 			frame.add(text);
 			frame.add(textField);
@@ -127,10 +134,10 @@ public class App {
 
 			ok.addActionListener(f ->{
 				nameWAV.set(textField.getText());
-
 				String name = textField.getText();
-				String specialCharacters = "!@#$%&*()'+,./:;<=>?[]^`{|}";
+				File temp = new File("app/src/audios/" + nameWAV.get() + ".wav");
 
+				String specialCharacters = "!@#$%&*()'+,./:;<=>?[]^`{|}";
 				if (name.length() == 0){
 					JOptionPane.showMessageDialog(frame, "Please enter a name for the file.");
 				}
@@ -140,10 +147,14 @@ public class App {
 					if (specialCharacters.contains(Character.toString(ch))) {
 						JOptionPane.showMessageDialog(frame, "The name should not contain any special characters.");
 						break;
+					}else if (temp.exists())
+					{
+						JOptionPane.showMessageDialog(frame, "A file with this name already exists.");
+						break;
 					}
 					else if (i == name.length() - 1){
 						gui.exportMusic(nameWAV.get(), 4.0);
-						JOptionPane.showMessageDialog(frame, "File was saved.");
+						JOptionPane.showMessageDialog(frame, "Successfully saved.");
 						frame.dispose();
 					}
 				}
